@@ -1,3 +1,4 @@
+# encoding: utf-8
 # VK - это небольшая библиотечка на Ruby, позволяющая прозрачно обращаться к API ВКонтакте
 # из Ruby.
 #
@@ -16,7 +17,6 @@ require 'net/http'
 require 'uri'
 require 'digest/md5'
 require 'json'
-require 'ostruct'
 
 module VK
   # Единственный класс библиотеки, работает как "соединение" с сервером ВКонтакте.
@@ -26,6 +26,8 @@ module VK
   # путём делегирования запросов.
   class Session
     VK_API_URL = 'http://api.vk.com/api.php'
+    VK_OBJECTS = %w(friends photos wall audio video places secure language notes pages offers 
+      questions messages newsfeed status polls subscriptions)
     attr_accessor :app_id, :api_secret
 
     # Конструктор. Получает следующие аргументы:
@@ -72,8 +74,7 @@ module VK
       end
     end
 
-    for method in %w(friends photos wall audio video places secure language notes pages offers 
-      questions messages newsfeed status polls subscriptions)
+    for method in VK_OBJECTS
       add_method method
     end
     
@@ -91,7 +92,7 @@ module VK
   class ServerError < Error
     attr_accessor :session, :method, :params, :error
     def initialize(session, method, params, error)
-      super "Server side error calling VK method."
+      super "Server side error calling VK method: #{error}"
       @session, @method, @params, @error = session, method, params, error
     end
   end
