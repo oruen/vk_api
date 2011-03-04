@@ -6,11 +6,11 @@ Gem::Specification.new do |s|
   s.name        = "vk_api"
   s.version     = VkApi::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["TODO: Write your name"]
-  s.email       = ["TODO: Write your email address"]
-  s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.authors     = ["Nikolay Karev", "Nick Recobra"]
+  s.email       = ["oruenu@gmail.com"]
+  s.homepage    = "https://github.com/oruen/vk_api"
+  s.summary     = %q{Гем для общения с Open API сайта ВКонтакте}
+  s.description = %q{Гем для общения с Open API сайта ВКонтакте без использования пользовательских сессий.}
 
   s.rubyforge_project = "vk_api"
 
