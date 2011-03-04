@@ -1,0 +1,18 @@
+= Vkontakte Api
+
+== Описание
+
+Библиотека VkApi имеет один значимый класс - <tt>VK:Session</tt>. После создания экземпляра сессии
+вы можете вызывать методы ВКонтакте как будто это методы сессии, например:
+  session = ::VkApi::Session.new app_id, api_secret
+  session.friends.get :uid => 12
+Такой вызов вернёт вам массив хэшей в виде:
+  => [{'uid' => '123'}, {:uid => '321'}]
+
+== Установка
+  gem install vk_api
+
+== Лицензия
+
+Copyright (c) 2011 Nikolay Karev
+MIT License (http://www.opensource.org/licenses/mit-license.php)
