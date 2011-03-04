@@ -17,7 +17,6 @@ require 'net/http'
 require 'uri'
 require 'digest/md5'
 require 'json'
-require 'active_support/core_ext/hash/keys'
 
 module VkApi
   # Единственный класс библиотеки, работает как "соединение" с сервером ВКонтакте.
@@ -48,7 +47,10 @@ module VkApi
       params[:method] = @prefix ? "#{@prefix}.#{method}" : method
       params[:api_id] = app_id
       params[:format] = 'json'
-      params[:sig] = sig params.stringify_keys
+      params[:sig] = sig(params.tap do |s|
+        # stringify keys
+        s.keys.each {|k| s[k.to_s] = s.delete k  }
+      end)
       response = JSON.parse(Net::HTTP.post_form(URI.parse(VK_API_URL), params).body)      
       raise ServerError.new self, method, params, response['error'] if response['error']
       response['response']
