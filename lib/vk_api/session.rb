@@ -47,6 +47,7 @@ module VkApi
       params[:method] = @prefix ? "#{@prefix}.#{method}" : method
       params[:api_id] = app_id
       params[:format] = 'json'
+      params[:v] = '3.0'
       params[:sig] = sig(params.tap do |s|
         # stringify keys
         s.keys.each {|k| s[k.to_s] = s.delete k  }
